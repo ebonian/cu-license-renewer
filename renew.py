@@ -29,8 +29,12 @@ def init_driver() -> webdriver.Chrome:
 
     return webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()), options=chrome_options)
 
-def login( driver: webdriver.Chrome, username: str, password: str):
+
+def borrow(driver: webdriver.Chrome, username: str, password: str, select_value: str):
     driver.get('https://licenseportal.it.chula.ac.th/')
+
+    wait = WebDriverWait(driver, 10)
+    wait.until(EC.presence_of_element_located((By.XPATH, '//input')))
 
     username_input = driver.find_element(By.ID, 'UserName')
     username_input.send_keys(username)
@@ -40,16 +44,6 @@ def login( driver: webdriver.Chrome, username: str, password: str):
 
     signin_button = driver.find_element(By.XPATH, '//button')
     signin_button.click()
-
-def logout( driver: webdriver.Chrome):
-    driver.get('https://licenseportal.it.chula.ac.th/Auth/Logout')
-
-
-def borrow(driver: webdriver.Chrome, username: str, password: str, select_value: str):
-    wait = WebDriverWait(driver, 10)
-    wait.until(EC.presence_of_element_located((By.XPATH, '//input')))
-
-    login(driver, username, password)
 
     driver.get('https://licenseportal.it.chula.ac.th/Home/Borrow')
     
@@ -66,4 +60,4 @@ def borrow(driver: webdriver.Chrome, username: str, password: str, select_value:
     save_button = driver.find_element(By.XPATH, '//button[@type="submit"]')
     save_button.click()
 
-    logout()
+    driver.get('https://licenseportal.it.chula.ac.th/Auth/Logout')
