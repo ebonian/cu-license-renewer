@@ -1,6 +1,6 @@
 import json
 import os
-import renew
+from renew import renew
 
 def main():
     f = open('software.json')

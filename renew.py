@@ -11,7 +11,7 @@ from selenium.webdriver.chrome.service import Service as ChromiumService
 
 from datetime import datetime, timedelta
 
-def renew(username: str, password: str, select_value: str) -> bool:
+def driver():
     chrome_options = Options()
     options = [
         "--no-sandbox",
@@ -27,8 +27,11 @@ def renew(username: str, password: str, select_value: str) -> bool:
     for option in options:
         chrome_options.add_argument(option)
 
-    driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()), options=chrome_options)
-    
+    return webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()), options=chrome_options)
+
+def renew(username: str, password: str, select_value: str) -> bool:
+    driver = driver()
+
     driver.get('https://licenseportal.it.chula.ac.th/')
 
     wait = WebDriverWait(driver, 10)
