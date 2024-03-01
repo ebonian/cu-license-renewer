@@ -1,8 +1,10 @@
 name: Renew Licenses
+
 on:
+  workflow_dispatch:
   schedule:
     - cron: '30 11 * * 1' 
-  workflow_dispatch:
+
 jobs:
   renew:
     runs-on: ubuntu-latest
