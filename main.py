@@ -1,6 +1,6 @@
 import json
 import os
-from renew import init_driver, login, borrow
+from renew import init_driver, borrow
 
 def main():
     f = open('software.json')
@@ -11,9 +11,8 @@ def main():
 
     driver = init_driver() 
 
-    login(driver, USERNAME, PASSWORD)
     for i in data:
-        borrow(driver, i['value'])
+        borrow(driver, USERNAME, PASSWORD, i['value'])
         print(f'Successfully borrowed {i["name"]}')
 
     driver.quit()
