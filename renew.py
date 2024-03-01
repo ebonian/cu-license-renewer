@@ -11,7 +11,7 @@ from selenium.webdriver.chrome.service import Service as ChromiumService
 
 from datetime import datetime, timedelta
 
-def driver():
+def init_driver():
     chrome_options = Options()
     options = [
         "--no-sandbox",
@@ -30,7 +30,7 @@ def driver():
     return webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()), options=chrome_options)
 
 def renew(username: str, password: str, select_value: str) -> bool:
-    driver = driver()
+    driver = init_driver()
 
     driver.get('https://licenseportal.it.chula.ac.th/')
 
