@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  IMAGE_NAME: github.event.repository.name
+  IMAGE_NAME: ${{ github.event.repository.name }}
   DOCKER_HUB_REPO: ebonian/${{ github.repository }}
 
 jobs:
