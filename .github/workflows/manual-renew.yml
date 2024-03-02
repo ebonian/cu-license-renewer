@@ -1,4 +1,4 @@
-name: Renew Licenses
+name: Manual Renew Licenses
 
 on:
   workflow_dispatch:
